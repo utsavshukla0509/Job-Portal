@@ -24,41 +24,18 @@ container.register({
 
 
 
-
-//REPO
-// container.register('userRepo', asClass(require("../repository/userRepo"), getScope()));
-// container.register('imageRepo', asClass(require("../repository/imageRepo"), getScope()));
-// container.register('imageLabelRepo', asClass(require("../repository/imageLabelRepo"), getScope()));
-
-
 //APIS
 //User
-// container.register('userDetailApi', asClass(require("../controller/user/userDetail"), getScope()));
-// container.register('signInApi', asClass(require("../controller/user/signIn"), getScope()));
-// container.register('signUpApi', asClass(require("../controller/user/signUp"), getScope()));
-// container.register('generateOTPApi', asClass(require("../controller/user/generateOTP"), getScope()));
-// container.register('addUserImageApi', asClass(require("../controller/user/addImage"), getScope()));
-// container.register('deleteUserImageApi', asClass(require("../controller/user/deleteImage"), getScope()));
-// container.register('updateDetailApi', asClass(require("../controller/user/updateDetail"), getScope()));
-// container.register('forgotVerifyApi', asClass(require("../controller/user/forgotVerify"), getScope()));
-// container.register('forgotUpdateApi', asClass(require("../controller/user/forgotUpdate"), getScope()));
+container.register('signUpApi', asClass(require("../controllers/recruiter/signUp"), getScope()));
+container.register('generateOTPApi', asClass(require("../controllers/recruiter/generateOTP"), getScope()));
+container.register('signInApi', asClass(require("../controllers/recruiter/signIn"), getScope()));
 
-
-//Image
-// container.register('addImageApi', asClass(require("../controller/image/addImage"), getScope()));
-// container.register('getImagesApi', asClass(require("../controller/image/getImages"), getScope()));
-// container.register('getImagesByDateApi', asClass(require("../controller/image/getImagesByDate"), getScope()));
-
-//Label
-// container.register('getLabelsApi', asClass(require("../controller/label/getLabels"), getScope()));
-// container.register('getSortedLabelsApi', asClass(require("../controller/label/getSortedLabels"), getScope()));
-// container.register('downloadImagesApi', asClass(require("../controller/label/downloadImages"), getScope()));
+//REPO
+container.register('recruiterRepo', asClass(require("../repository/recruiterRepo"), getScope()));
 
 //Utility
-// container.register('userUtility', asClass(require("../utilities/userUtility"), getScope()));
-// container.register('imageUtility', asClass(require("../utilities/imageUtility"), getScope()));
-// container.register('labelUtility', asClass(require("../utilities/labelUtility"), getScope()));
-// container.register('helper', asClass(require("../utilities/helper"), getScope()));
+container.register('recruiterUtility', asClass(require("../utilities/recruiterUtility"), getScope()));
+container.register('helper', asClass(require("../utilities/helper"), getScope()));
 
 
 
