@@ -1,9 +1,9 @@
 class generateOTP{
 
-    constructor(recruiterRepo, helper, recruiterUtility){
-        this.recruiterRepo = recruiterRepo;
+    constructor(userRepo, helper, userUtility){
+        this.userRepo = userRepo;
         this.helper = helper;
-        this.recruiterUtility = recruiterUtility;
+        this.userUtility = userUtility;
     }
 
     async handleRequest(req, res){

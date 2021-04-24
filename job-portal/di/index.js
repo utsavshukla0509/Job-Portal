@@ -25,16 +25,24 @@ container.register({
 
 
 //APIS
-//User
-container.register('signUpApi', asClass(require("../controllers/recruiter/signUp"), getScope()));
-container.register('generateOTPApi', asClass(require("../controllers/recruiter/generateOTP"), getScope()));
-container.register('signInApi', asClass(require("../controllers/recruiter/signIn"), getScope()));
+//Recruiter
+container.register('signUpApi', asClass(require("../controllers/user/signUp"), getScope()));
+container.register('generateOTPApi', asClass(require("../controllers/user/generateOTP"), getScope()));
+container.register('signInApi', asClass(require("../controllers/user/signIn"), getScope()));
+
+//Job
+container.register('postJobApi', asClass(require("../controllers/job/postJob"), getScope()));
+
+//Application
+container.register('addApplicationApi', asClass(require("../controllers/application/apply"), getScope()));
 
 //REPO
 container.register('recruiterRepo', asClass(require("../repository/recruiterRepo"), getScope()));
+container.register('candidateRepo', asClass(require("../repository/candidateRepo"), getScope()));
+container.register('jobRepo', asClass(require("../repository/jobRepo"), getScope()));
 
 //Utility
-container.register('recruiterUtility', asClass(require("../utilities/recruiterUtility"), getScope()));
+container.register('recruiterUtility', asClass(require("../utilities/userUtility"), getScope()));
 container.register('helper', asClass(require("../utilities/helper"), getScope()));
 
 
