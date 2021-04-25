@@ -13,9 +13,14 @@ class SignUp{
             try{
                 
                 const role = req.params.role;
+
                 if(role === "recruiter"){
 
-                    const {name,email,companyName,otp} = req.body;
+                    const {username,email,companyname,otp} = req.body;
+                    const name = username;
+                    const companyName = companyname;
+
+                    
                     if(!name){
                         return this.helper.writeResponse({msg : "missing name field" ,code : 400},null,res);
                     }
@@ -37,11 +42,18 @@ class SignUp{
                             await this.recruiterRepo.createRecruiter(name,email,companyName);
                             const recruiterData = await this.recruiterRepo.getRecruiterDetailByEmail(email);
                             
-                            return this.helper.writeResponse(null,{
-                                message: "The user account and platform has been signed/set up successfully!",
+                            let recruiterInfo = {};
+                            recruiterInfo.username = recruiterData[0].name;
+                            recruiterInfo.email = recruiterData[0].email;
+                            recruiterInfo.companyname = recruiterData[0].companyname;
+                            const token = await this.userUtility.generateToken(recruiterInfo);
+                            recruiterInfo.token = token;   
+                            return this.helper.writeResponse(null,  {
+                                msg: "Authentication has been successful",
                                 status : true,
-                                recruiterData
-                            },res);
+                                recruiterInfo
+                            },res); 
+
                         }
                         else{
                             return this.helper.writeResponse({msg : "Incorrect OTP" ,code : 400},{status : false},res);
@@ -75,11 +87,16 @@ class SignUp{
                             await this.candidateRepo.createCandidate(name,email,resume);
                             const candidateData = await this.candidateRepo.getCandidateDetailByEmail(email);
                             
-                            return this.helper.writeResponse(null,{
-                                message: "The user account and platform has been signed/set up successfully!",
+                            let candidateInfo = {};
+                            candidateInfo.username = candidateData[0].name;
+                            candidateInfo.email = candidateData[0].email;
+                            const token = await this.userUtility.generateToken(candidateInfo);
+                            candidateInfo.token = token;   
+                            return this.helper.writeResponse(null,  {
+                                msg: "Authentication has been successful",
                                 status : true,
-                                candidateData
-                            },res);
+                                candidateInfo
+                            },res); 
                         }
                         else{
                             return this.helper.writeResponse({msg : "Incorrect OTP" ,code : 400},{status : false},res);
