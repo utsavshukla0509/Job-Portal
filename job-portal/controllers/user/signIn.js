@@ -1,7 +1,7 @@
 
 class SignIn{
 
-    constructor(recruiterRepo, helper, userUtility){
+    constructor(recruiterRepo, helper, userUtility,candidateRepo){
         this.recruiterRepo = recruiterRepo;
         this.candidateRepo = candidateRepo;
         this.helper = helper;
@@ -28,16 +28,16 @@ class SignIn{
                 const storedOTP = await this.userUtility.getValue(email);
                 if(storedOTP !== null){
                     if(storedOTP === otp){
-                        let recruiterInfo = {};
-                        recruiterInfo.userId = recruiterData[0].id;
-                        recruiterInfo.username = recruiterData[0].name;
-                        recruiterInfo.email = recruiterData[0].email;
-                        const token = await this.userUtility.generateToken(recruiterInfo);
-                        recruiterInfo.token = token;   
+                        let userInfo = {};
+                        userInfo.userId = recruiterData[0].id;
+                        userInfo.username = recruiterData[0].name;
+                        userInfo.email = recruiterData[0].email;
+                        const token = await this.userUtility.generateToken(userInfo);
+                        userInfo.token = token;   
                         return this.helper.writeResponse(null,  {
                             msg: "Authentication has been successful",
                             status : true,
-                            recruiterInfo
+                            userInfo
                         },res);     
 
                     }
@@ -60,16 +60,16 @@ class SignIn{
             const storedOTP = await this.userUtility.getValue(email);
             if(storedOTP !== null){
                 if(storedOTP === otp){
-                    let candidateInfo = {};
-                    candidateInfo.userId = candidateData[0].id;
-                    candidateInfo.username = candidateData[0].name;
-                    candidateInfo.email = candidateData[0].email;
-                    const token = await this.userUtility.generateToken(candidateInfo);
-                    candidateInfo.token = token;   
+                    let userInfo = {};
+                    userInfo.userId = candidateData[0].id;
+                    userInfo.username = candidateData[0].name;
+                    userInfo.email = candidateData[0].email;
+                    const token = await this.userUtility.generateToken(userInfo);
+                    userInfo.token = token;   
                     return this.helper.writeResponse(null,  {
                         msg: "Authentication has been successful",
                         status : true,
-                        candidateInfo
+                        userInfo
                     },res);     
 
                 }

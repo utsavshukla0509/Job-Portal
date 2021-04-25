@@ -1,8 +1,9 @@
 
 class PostJob{
     
-    constructor(jobRepo, helper){
+    constructor(recruiterRepo,jobRepo ,helper){
         this.jobRepo = jobRepo;
+        this.recruiterRepo = recruiterRepo;
         this.helper = helper;
     }
 
@@ -10,10 +11,17 @@ class PostJob{
 
             try{
                 const {companyname,description,skill} = req.body;
-                const recruiterId = req.userData.userId;
-                const companyName = companyname;
-                // console.log(companyName,description,skill);
+                let recruiterId;
                 
+                if(req.userData.userId === undefined){
+                    
+                    const data = await this.recruiterRepo.getRecruiterDetailByEmail(req.userData.email);
+                    recruiterId = data[0].id;
+                }
+                else{
+                    recruiterId = req.userData.userId;
+                }
+                const companyName = companyname;
                 
                 if(!companyName){
                     return this.helper.writeResponse({msg : "company name is missing" ,code : 400},null,res);

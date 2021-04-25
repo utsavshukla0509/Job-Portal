@@ -8,8 +8,7 @@ class GetAllJob{
       
     async handleRequest(req,res){    
         try{
-          const companyName = "ccc";
-          // req.userData.companyname;
+          const companyName = req.userData.companyname;
 
           if(!companyName) {
             return this.helper.writeResponse({msg : "Missing Company Field" ,code : 400},null,res);
