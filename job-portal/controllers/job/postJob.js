@@ -9,21 +9,23 @@ class PostJob{
     async handleRequest(req, res){
 
             try{
-                const {companyName,description,active,skill} = req.body;
+                const {companyname,description,skill} = req.body;
                 const recruiterId = req.userData.userId;
+                const companyName = companyname;
+                // console.log(companyName,description,skill);
                 
                 
                 if(!companyName){
                     return this.helper.writeResponse({msg : "company name is missing" ,code : 400},null,res);
                 }
 
-                await this.jobRepo.createJob(recruiterId,companyName,description,active,skill);
-                const jobData = await this.jobRepo.getJobDetailByRecruiterId(recruiterId);
+                await this.jobRepo.createJob(recruiterId,companyName,description,skill);
+                // const jobData = await this.jobRepo.getJobDetailByRecruiterId(recruiterId);
                 
                 return this.helper.writeResponse(null,{
-                    message: "The user account and platform has been signed/set up successfully!",
+                    msg: "Job is successfully created",
                     status : true,
-                    jobData
+                    // jobData
                 },res);
             }
             catch(err){
