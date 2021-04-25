@@ -24,7 +24,7 @@ import {
   return async (dispatch) => {
     try{
       // console.log("heyhey");
-      const result = await Axios.get("application/detail/" + "1"
+      const result = await Axios.get("application/detail/" + jobId
     //   ,
     //   {
     //     headers: {

@@ -17,9 +17,9 @@ class ShowJob extends React.Component{
     this.props.showJob();
   }
 
-  handleClickShowCandidatesList = () => {
+  handleClickShowCandidatesList = (jobId) => {
     this.setState({showCandidateList : true});
-    this.props.showCandidate("1");
+    this.props.showCandidate(jobId);
   }
 
 handleCloseCandidateBox = () => {
@@ -128,11 +128,9 @@ handleCloseCandidateBox = () => {
               </p>
               </p>
           </div>
-          <div style={{
-            
-          }}>
+          <div>
             <button  class="btn blue-gradient" 
-            onClick={this.handleClickShowCandidatesList}
+            onClick = {() => this.handleClickShowCandidatesList(job.id)}
             >
                 Applied Candidates</button>
             </div>
