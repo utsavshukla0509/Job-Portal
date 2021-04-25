@@ -1,7 +1,7 @@
 import {
-    // LOGIN_SUCCESS,
-    // LOGIN_ERROR,
-    // SIGNOUT,
+    LOGIN_SUCCESS,
+    LOGIN_ERROR,
+    SIGNOUT,
     SIGNUP_ERROR,
     SIGNUP_SUCCESS,
     GET_OTP_SUCCESS,
@@ -15,46 +15,46 @@ import {
     userData: {},
     authMessage: null,
     status : false,
-    isVerify : false
+    isVerify : false,
   };
   
   export default function (state = initState, action) {
     switch (action.type) {
         
-    //   case LOGIN_SUCCESS:
-    //     return {
-    //       ...state,
-    //       loggedIn: action.payload.status,
-    //       userData: action.payload.userInfo,
-    //       authMessage: action.payload.msg,
-    //     };
-    //   case LOGIN_ERROR:
-    //     return {
-    //       ...state,
-    //       authMessage: action.error.response.data.msg,
-    //     };
+      case LOGIN_SUCCESS:
+        return {
+          ...state,
+          status: action.payload.status,
+          userData: action.payload.userInfo,
+          authMessage: action.payload.msg,
+        };
+      case LOGIN_ERROR:
+        return {
+          ...state,
+          // authMessage: action.error.response.data.msg,
+        };
 
       case SIGNUP_SUCCESS:
         return {
           ...state,
           status: action.payload.status,
-          userData: action.payload.data,
+          userData: action.payload.userInfo,
           authMessage: action.payload.msg,
         };
   
       case SIGNUP_ERROR:
         return {
           ...state,
-          authMessage: action.error.response.data.msg,
+          // authMessage: action.error.response.data.msg,
         };
   
-    //   case SIGNOUT:
-    //     return {
-    //       ...state,
-    //       userData: {},
-    //       loggedIn: false,
-    //       authMessage: null,
-    //     };
+      case SIGNOUT:
+        return {
+          ...state,
+          userData: {},
+          loggedIn: false,
+          authMessage: null,
+        };
   
         case GET_OTP_SUCCESS:
         return {

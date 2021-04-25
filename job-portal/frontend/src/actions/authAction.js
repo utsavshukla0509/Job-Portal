@@ -1,7 +1,7 @@
 import {
-    // LOGIN_SUCCESS,
-    // LOGIN_ERROR,
-    // SIGNOUT,
+    LOGIN_SUCCESS,
+    LOGIN_ERROR,
+    SIGNOUT,
     SIGNUP_SUCCESS,
     SIGNUP_ERROR,
     GET_OTP_SUCCESS,
@@ -12,26 +12,26 @@ import {
   import Axios from "axios";
 
 
-//   export const signIn = (credentials) => {
-//     return async (dispatch) => {
-//       try {
-//         // console.log(credentials);
-//         const result = await Axios.post("/user/signin", credentials);
-//         // console.log(result);
-//         dispatch({ type: LOGIN_SUCCESS, payload: result.data});
-//       } catch (error) {
-//         // console.log(error.response);
-//         dispatch({ type: LOGIN_ERROR, error });
-//       }
-//     };
-//   };
+  export const signIn = (credentials,role) => {
+    return async (dispatch) => {
+      try {
+        // console.log(credentials);
+        const result = await Axios.post("/user/signin/" + role, credentials);
+        console.log(result);
+        dispatch({ type: LOGIN_SUCCESS, payload: result.data});
+      } catch (error) {
+        // console.log(error.response);
+        dispatch({ type: LOGIN_ERROR, error });
+      }
+    };
+  };
   
-  export const signUp = (credentials) => {
+  export const signUp = (credentials,role) => {
     return async (dispatch) => {
       try {
         // console.log("credentials");
         console.log(credentials); 
-        const result = await Axios.post("/user/signup/recruiter", credentials);
+        const result = await Axios.post("/user/signup/" + role, credentials);
         console.log("hello",result);
         dispatch({ type: SIGNUP_SUCCESS, payload: result.data});
       } catch (error) {
@@ -42,16 +42,16 @@ import {
   };
 
   
-//   export const signOut = () => {
-//     return (dispatch) => {
-//     dispatch({ type: SIGNOUT });
-//   };
-// };
+  export const signOut = () => {
+    return (dispatch) => {
+    dispatch({ type: SIGNOUT });
+  };
+};
 
-export const getOTP = (email) => {
+export const getOTP = (email,type,role) => {
   return async (dispatch) => {
     try {
-      const result = await Axios.post("/user/generateotp/0/recruiter",{"email" : email});
+      const result = await Axios.post("/user/generateotp/" +type + "/" + role,{"email" : email});
       console.log(result); 
       dispatch({ type: GET_OTP_SUCCESS, payload: result.data });
     } catch (error) {
