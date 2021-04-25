@@ -6,7 +6,7 @@ require('dotenv').config();
 const container = require("./di");
 
 
-const recruiterRoute = require("./routes/userRoute");
+const userRoute = require("./routes/userRoute");
 const applicationRoute = require("./routes/applicationRoute");
 const jobRoute = require("./routes/jobRoute");
 
@@ -27,7 +27,7 @@ app.use((req,res,next)=>{
 });
 
 
-app.use("/recruiter", recruiterRoute);
+app.use("/user", userRoute);
 app.use("/application", applicationRoute);
 app.use("/job", jobRoute);
 

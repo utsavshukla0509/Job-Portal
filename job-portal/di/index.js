@@ -32,17 +32,22 @@ container.register('signInApi', asClass(require("../controllers/user/signIn"), g
 
 //Job
 container.register('postJobApi', asClass(require("../controllers/job/postJob"), getScope()));
+container.register('getAllJobApi', asClass(require("../controllers/job/getAllJob"), getScope()));
 
 //Application
 container.register('addApplicationApi', asClass(require("../controllers/application/apply"), getScope()));
+container.register('getAllCandidateApi', asClass(require("../controllers/application/getCandidate"), getScope()));
+
+
 
 //REPO
 container.register('recruiterRepo', asClass(require("../repository/recruiterRepo"), getScope()));
 container.register('candidateRepo', asClass(require("../repository/candidateRepo"), getScope()));
+container.register('applicationRepo', asClass(require("../repository/applicationRepo"), getScope()));
 container.register('jobRepo', asClass(require("../repository/jobRepo"), getScope()));
 
 //Utility
-container.register('recruiterUtility', asClass(require("../utilities/userUtility"), getScope()));
+container.register('userUtility', asClass(require("../utilities/userUtility"), getScope()));
 container.register('helper', asClass(require("../utilities/helper"), getScope()));
 
 
