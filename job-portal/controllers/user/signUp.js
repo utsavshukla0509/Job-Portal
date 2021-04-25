@@ -14,6 +14,7 @@ class SignUp{
                 
                 const role = req.params.role;
 
+
                 if(role === "recruiter"){
 
                     const {username,email,companyname,otp} = req.body;
@@ -42,16 +43,16 @@ class SignUp{
                             await this.recruiterRepo.createRecruiter(name,email,companyName);
                             const recruiterData = await this.recruiterRepo.getRecruiterDetailByEmail(email);
                             
-                            let recruiterInfo = {};
-                            recruiterInfo.username = recruiterData[0].name;
-                            recruiterInfo.email = recruiterData[0].email;
-                            recruiterInfo.companyname = recruiterData[0].companyname;
-                            const token = await this.userUtility.generateToken(recruiterInfo);
-                            recruiterInfo.token = token;   
+                            let userInfo = {};
+                            userInfo.username = recruiterData[0].name;
+                            userInfo.email = recruiterData[0].email;
+                            userInfo.companyname = recruiterData[0].companyname;
+                            const token = await this.userUtility.generateToken(userInfo);
+                            userInfo.token = token;   
                             return this.helper.writeResponse(null,  {
                                 msg: "Authentication has been successful",
                                 status : true,
-                                recruiterInfo
+                                userInfo
                             },res); 
 
                         }
@@ -65,8 +66,8 @@ class SignUp{
                 }
                 else{
 
-                    const {name,email,resume,otp} = req.body;
-                    if(!name){
+                    const {username,email,resume,otp} = req.body;
+                    if(!username){
                         return this.helper.writeResponse({msg : "missing name field" ,code : 400},null,res);
                     }
                     else if(!email){
@@ -84,18 +85,18 @@ class SignUp{
                     if(storedOTP !== null){
                         if(storedOTP === otp){
 
-                            await this.candidateRepo.createCandidate(name,email,resume);
+                            await this.candidateRepo.createCandidate(username,email,resume);
                             const candidateData = await this.candidateRepo.getCandidateDetailByEmail(email);
                             
-                            let candidateInfo = {};
-                            candidateInfo.username = candidateData[0].name;
-                            candidateInfo.email = candidateData[0].email;
-                            const token = await this.userUtility.generateToken(candidateInfo);
-                            candidateInfo.token = token;   
+                            let userInfo = {};
+                            userInfo.username = candidateData[0].name;
+                            userInfo.email = candidateData[0].email;
+                            const token = await this.userUtility.generateToken(userInfo);
+                            userInfo.token = token;   
                             return this.helper.writeResponse(null,  {
                                 msg: "Authentication has been successful",
                                 status : true,
-                                candidateInfo
+                                userInfo
                             },res); 
                         }
                         else{

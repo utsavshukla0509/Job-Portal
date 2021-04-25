@@ -37,6 +37,21 @@ class RecruiterRepo {
                 });
             });
         }
+
+        async getAllJobDetail(){
+            return new Promise((resolve,reject)=>{
+                const query = `SELECT * FROM job ORDER BY createdon DESC;`;
+                return this.mysqlClient.query(query,(err,result) => {
+                    if(err){
+                        reject(err);
+                    }
+                    if(result.length === 0){
+                        return resolve([]);
+                    }
+                    return resolve(result);  
+                });
+            });
+        }
     
         async createJob(recruiterId,companyName,description,skill){
             return new Promise((resolve,reject)=>{

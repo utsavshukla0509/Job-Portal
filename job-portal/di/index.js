@@ -32,12 +32,14 @@ container.register('signInApi', asClass(require("../controllers/user/signIn"), g
 
 //Job
 container.register('postJobApi', asClass(require("../controllers/job/postJob"), getScope()));
+container.register('getAllPostJobApi', asClass(require("../controllers/job/getAllPostJob"), getScope()));
 container.register('getAllJobApi', asClass(require("../controllers/job/getAllJob"), getScope()));
+
 
 //Application
 container.register('addApplicationApi', asClass(require("../controllers/application/apply"), getScope()));
 container.register('getAllCandidateApi', asClass(require("../controllers/application/getCandidate"), getScope()));
-
+container.register('getAppliedJobApi', asClass(require("../controllers/application/getAppliedJob"), getScope()));
 
 
 //REPO
