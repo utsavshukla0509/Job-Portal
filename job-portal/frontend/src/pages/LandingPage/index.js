@@ -22,7 +22,7 @@ class LandingPage extends React.Component{
 
     render(){
         if(this.state.recruiterClicked){this.props.history.push("/register");}
-        if(this.state.candidateClicked){this.props.history.push("/register/candidate");}
+        if(this.state.candidateClicked){this.props.history.push("/register/");}
         return(
            
                 <div class="view full-page-intro" style={{
@@ -57,7 +57,7 @@ class LandingPage extends React.Component{
                             style={{
                                 // "margin-left": "500px",
                             }}
-                            onClick={this.handleClickRecruiter}>Recruiter</button>
+                            onClick={() => this.handleClickRecruiter()}>Recruiter</button>
                         </div>
                         <div>
                             <button  class="btn blue-gradient" 

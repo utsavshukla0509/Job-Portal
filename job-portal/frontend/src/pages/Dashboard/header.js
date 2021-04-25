@@ -3,7 +3,7 @@ import img from "./dashboardUserImage.jpg";
 // import FileUpload from "./fileUpload";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-// import { userDetail, signOut } from "../../actions/authAction";
+import { signOut } from "../../actions/authAction";
 // import MultiDropDown from "./multiDropDown";
 
 class Header extends React.Component {
@@ -19,7 +19,8 @@ class Header extends React.Component {
 //    this.props.userDetail();
   }
 
-  logOut = () => {
+  logOut = (e) => {
+    e.preventDefault();
     this.setState({ logout_status: false });
     localStorage.setItem("loggedIn", false);
     this.props.signOut();
@@ -37,9 +38,9 @@ class Header extends React.Component {
     //   coverImage = userData.image;
     // }
 
-    // if (!this.state.logout_status) {
-    //   return <Redirect to="/login" />;
-    // }
+    if (!this.state.logout_status) {
+      return <Redirect to="/register" />;
+    }
 
     return (
       <header >
@@ -141,7 +142,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    // signOut: () => dispatch(signOut()),
+    signOut: () => dispatch(signOut()),
     // userDetail: () => dispatch(userDetail()),
   };
 };

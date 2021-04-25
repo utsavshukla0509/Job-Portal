@@ -28,11 +28,11 @@ class Dashboard extends React.Component {
 
   render() {
     // console.log(localStorage.getItem('name'));
-    // if (localStorage.getItem('loggedIn') === "false" || 
-    //   localStorage.getItem('name') === "" || 
-    // localStorage.getItem('name') === null || 
-    // localStorage.getItem('name') === undefined) 
-    // this.props.history.push("/login");
+    if (localStorage.getItem('loggedIn') === "false" || 
+      localStorage.getItem('token') === "" || 
+    localStorage.getItem('token') === null || 
+    localStorage.getItem('token') === undefined) 
+    this.props.history.push("/register");
     const {currentOption} = this.state;
     
     return (

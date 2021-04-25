@@ -9,7 +9,12 @@ import {
   export const postJob = (jobDetail) => {
     return async (dispatch) => {
       try {
-        const result = await Axios.post("/job/newjob", jobDetail);
+        const result = await Axios.post("/job/newjob", jobDetail,
+        {
+          headers: {
+            'Authorization': `Beaver ${localStorage.getItem('token')}` 
+          }
+        });
         
         dispatch({ type: POST_JOB_SUCCESS, payload: result.data});
       } catch (error) {
@@ -25,12 +30,12 @@ import {
     try{
       // console.log("heyhey");
       const result = await Axios.get("/job/detail"
-    //   ,
-    //   {
-    //     headers: {
-    //       'Authorization': `Beaver ${localStorage.getItem('name')}` 
-    //     }
-    //   }
+      ,
+      {
+        headers: {
+          'Authorization': `Beaver ${localStorage.getItem('token')}` 
+        }
+      }
     );
     
       dispatch({ type: GET_ALL_POST_JOB_SUCCESS, payload: result.data });
