@@ -15,7 +15,7 @@ import {
     userData: {},
     authMessage: null,
     status : false,
-    isVerify : false,
+    isVerify : false
   };
   
   export default function (state = initState, action) {
