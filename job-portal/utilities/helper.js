@@ -9,6 +9,7 @@ class Helper {
             err.code = err.code || 500;
             console.log('req has been sent with status:', err.code);
             if(info){
+                console.log(err);
                 return res.status(err.code).json({"msg": err.msg,"info" : err.data,"status" : info.status});
             }
             else{

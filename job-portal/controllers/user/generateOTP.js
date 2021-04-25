@@ -13,6 +13,7 @@ class generateOTP{
             const {email} = req.body;
             const type = req.params.type;
             const role = req.params.role;
+            console.log(role);
 
             if(!email){
                 return this.helper.writeResponse({msg : "Empty Email" ,code : 400},null,res);
@@ -21,6 +22,7 @@ class generateOTP{
             let DBResp;
             
             if(role === "recruiter"){
+                
                  DBResp = await this.recruiterRepo.getRecruiterDetailByEmail(email);
             }
             else{

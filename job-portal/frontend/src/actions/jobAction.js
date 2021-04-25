@@ -3,6 +3,8 @@ import {
     POST_JOB_ERROR,
     GET_ALL_POST_JOB_SUCCESS,
     GET_ALL_POST_JOB_ERROR,
+    GET_ALL_JOB_SUCCESS,
+    GET_ALL_JOB_ERROR,
   } from "./actionTypes";
   import Axios from "axios";
 
@@ -25,6 +27,7 @@ import {
   };
 
 
+
   export const showJob = ()=>{
   return async (dispatch) => {
     try{
@@ -45,3 +48,26 @@ import {
     }
   };
 };
+
+
+export const showAllJob = ()=>{
+  return async (dispatch) => {
+    try{
+      // console.log("heyhey");
+      const result = await Axios.get("job/alljob/detail"
+      ,
+      {
+        headers: {
+          'Authorization': `Beaver ${localStorage.getItem('token')}` 
+        }
+      }
+    );
+    // console.log(result.data);
+      dispatch({ type: GET_ALL_JOB_SUCCESS, payload: result.data });
+    }
+    catch(error){
+      dispatch({ type: GET_ALL_JOB_ERROR, error });
+    }
+  };
+};
+

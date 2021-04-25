@@ -8,15 +8,9 @@ class GetAllJob{
       
     async handleRequest(req,res){    
         try{
-          const companyName = req.userData.companyname;
-
-          if(!companyName) {
-            return this.helper.writeResponse({msg : "Missing Company Field" ,code : 400},null,res);
-          }
-
-            const jobData = await this.jobRepo.getAllJobDetailByCompanyName(companyName);
-            return this.helper.writeResponse(null,{jobData},res);  
-          
+            const jobData = await this.jobRepo.getAllJobDetail();
+            // console.log(jobData);
+            return this.helper.writeResponse(null,{jobData},res);
         }
         catch(error){
           console.log(error);
