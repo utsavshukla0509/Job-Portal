@@ -6,11 +6,7 @@ class RecruiterRepo {
     constructor(mysqlClient) {
         this.mysqlClient = mysqlClient;
     }
-    
-        // async getUserDetailById(userId){
-        //     const query = `SELECT * FROM public.userinfo WHERE userid = ${userId};`;
-        //     return this.postgresClient.query(query);
-        // }
+
     
         async getCandidateDetailByEmail(email){
             return new Promise((resolve,reject)=>{
