@@ -15,6 +15,7 @@ class Login extends React.Component {
         companyname: ""
       },
       errors: {},
+      userRole : this.props.location.state,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -57,12 +58,8 @@ class Login extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let role = "recruiter";
-    if(this.state.data.companyname === ""){
-      role = "candidate";
-    }
     
-    this.props.getOTP(this.state.data.email,"1",role);
+    this.props.getOTP(this.state.data.email,"1",this.state.userRole);
   };
 
   handleVerify = (e) => {
@@ -75,26 +72,17 @@ class Login extends React.Component {
       this.state.data.otp !== ""
     ) 
     {
-      let role = "recruiter";
-
-      const {companyname} = this.state.data;
-      if(companyname === ""){
-        role = "candidate";
-      }
+      
     //   const errors = this.validate();
     // if (_.isEmpty(errors)) 
-    this.props.signIn(this.state.data,role);
+    this.props.signIn(this.state.data,this.state.userRole);
     }
   };
 
   handleResend = (e) => {
     e.preventDefault();
 
-    let role = "recruiter";
-    if(this.state.data.companyname === ""){
-      role = "candidate";
-    }
-    this.props.getOTP(this.state.data.email,"1",role);
+    this.props.getOTP(this.state.data.email,"1",this.state.userRole);
   };
 
   render() {
@@ -105,8 +93,9 @@ class Login extends React.Component {
     if (status) {
       localStorage.setItem("token",userData.token);
       localStorage.setItem("loggedIn", true);
-      this.props.history.push("/dashboard")
+      this.props.history.push("/dashboard",this.state.userRole)
   };
+  // console.log(this.state.userRole);
     
     return (
       <div className="">

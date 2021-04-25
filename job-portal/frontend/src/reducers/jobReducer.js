@@ -3,6 +3,8 @@ import {
     POST_JOB_ERROR,
     GET_ALL_POST_JOB_SUCCESS,
     GET_ALL_POST_JOB_ERROR,
+    GET_ALL_JOB_SUCCESS,
+    GET_ALL_JOB_ERROR,
   } from "../actions/actionTypes";
   
   const initState = {
@@ -35,6 +37,17 @@ import {
           jobData: action.payload.jobData,
         };
       case GET_ALL_POST_JOB_ERROR:
+        return {
+          ...state,
+          authMessage: action.error.response.data.msg,
+        };
+
+        case GET_ALL_JOB_SUCCESS:
+        return {
+          ...state,
+          jobData: action.payload.jobData,
+        };
+      case GET_ALL_JOB_ERROR:
         return {
           ...state,
           authMessage: action.error.response.data.msg,

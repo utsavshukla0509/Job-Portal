@@ -11,8 +11,11 @@ class RegisterForm extends React.Component {
         username: "",
         email: "",
         companyname: "",
+        resume : "",
         otp: "",
+
       },
+      userRole : this.props.location.state,
       errors: {},
       authError: "",
     };
@@ -59,11 +62,7 @@ class RegisterForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    let role = "recruiter";
-    if(this.state.data.companyname === ""){
-      role = "candidate";
-    }
-    this.props.getOTP(this.state.data.email,"0",role);
+    this.props.getOTP(this.state.data.email,"0",this.state.userRole);
   };
 
   handleVerify = (e) => {
@@ -72,28 +71,22 @@ class RegisterForm extends React.Component {
     if (
       this.state.data.username !== "" &&
       this.state.data.email !== "" &&
-      this.state.data.username !== "" &&
       this.state.data.otp !== ""
     ) 
     {
-      let role = "recruiter";
-
-      const { username, companyname, email,otp} = this.state.data;
-      if(companyname === ""){
-        role = "candidate";
-      }
-      this.props.signUp({ username, email, companyname, otp },role);
+      
+      this.props.signUp(this.state.data,this.state.userRole);
     }
   };
+
+  handleOnChangeToLogin = () => {
+    this.props.history.push("/login",this.state.userRole);
+  }
 
   handleResend = (e) => {
     e.preventDefault();
 
-    let role = "recruiter";
-    if(this.state.data.companyname === ""){
-      role = "candidate";
-    }
-    this.props.getOTP(this.state.data.email,"0",role);
+    this.props.getOTP(this.state.data.email,"0",this.state.userRole);
   };
 
   schema = {
@@ -103,14 +96,12 @@ class RegisterForm extends React.Component {
   };
 
   render() {
-    // if (this.props.status === true && this.state.isVerify === false) {
-    //   this.setState({ isVerify: true });
-    // }
     const { authMessage, status, userData, loggedIn ,isVerify} = this.props;
     if(loggedIn === true){this.props.history.push("/dashboard");}
     const { errors, authError } = this.state;
-    const { username, email, companyname, otp} = this.state.data;
-    console.log("helllllll",status,userData);
+    const { username, email, companyname, otp,resume} = this.state.data;
+    console.log("helllllll",this.state.userRole);
+    
     if (status) {
         localStorage.setItem("token",userData.token);
         localStorage.setItem("loggedIn", true);
@@ -136,11 +127,12 @@ class RegisterForm extends React.Component {
 
                     <div className="">
                       <div className="d-flex flex-row-reverse">
-                        <a href="http://localhost:3000/login">
+                        <a >
                           {" "}
                           <button
                             type="button"
                             className="btn btn-info btn-rounded btn-sm"
+                            onClick = {this.handleOnChangeToLogin}
                           >
                             LogIn
                           </button>
@@ -193,7 +185,9 @@ class RegisterForm extends React.Component {
                               </div>
                             )}
                           </div>
-
+                            {
+                              this.state.userRole === "recruiter"
+                              ?
                           <div className="md-form">
                             <i className="fas fa-building prefix"></i>
                             <input
@@ -212,6 +206,27 @@ class RegisterForm extends React.Component {
                               </div>
                             )}
                           </div>
+
+                          :
+                          <div className="md-form">
+                            <i className="fas fa-file prefix"></i>
+                            <input
+                              name="resume"
+                              id="orangeForm-resume"
+                              className="form-control"
+                              type="text"
+                              onChange={this.handleChange}
+                              value={resume}
+                            />
+                            <label htmlFor="orangeForm-resume">Resume(google drive link)</label>
+                            {errors["resume"] && (
+                              <div className="alert alert-danger">
+                                {" "}
+                                {errors["resume"]}{" "}
+                              </div>
+                            )}
+                          </div>
+                          }
 
                           {isVerify ? (
                             <div className="md-form">
@@ -296,7 +311,8 @@ const mapStateToProps = (state) => {
     loggedIn: state.auth.loggedIn,
     authMessage: state.auth.authMessage,
     status: state.auth.status,
-    isVerify : state.auth.isVerify
+    isVerify : state.auth.isVerify,
+    userRole: state.auth.userRole
   };
 };
 const mapDispatchToProps = (dispatch) => {
