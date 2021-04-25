@@ -1,5 +1,5 @@
 import React from "react";
-
+import Register from "../Register";
 
 class LandingPage extends React.Component{
     constructor(props){
@@ -13,25 +13,33 @@ class LandingPage extends React.Component{
     }
     
     handleClickRecruiter = () =>{
+        
         this.setState({recruiterClicked : true});
     }
 
     handleClickCandidate = () =>{
+        
         this.setState({candidateClicked : true});
     }
 
     render(){
-        if(this.state.recruiterClicked){this.props.history.push("/register");}
-        if(this.state.candidateClicked){this.props.history.push("/register/");}
+        if(this.state.recruiterClicked){
+            this.props.history.push("/register","recruiter");
+        }
+        if(this.state.candidateClicked){
+            this.props.history.push("/register","candidate");
+        }
         return(
            
-                <div class="view full-page-intro" style={{
+                <div class="view full-page-intro" 
+                style={{
                     "background-image": 
-                    "url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg')",
+                    "url('https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-g20-summit-simple-business-background-image_232743.jpg')",
                     "background-repeat": "no-repeat",
-                    "background-size": "cover"
+                    "backgroundSize" : "cover"
                     ,"height":"17.7cm"
-                }}>
+                }}
+                >
                 <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
                 <div class="container">
                     <div class="row wow fadeIn">
@@ -41,7 +49,6 @@ class LandingPage extends React.Component{
                         <h2>Find A Job at India's No. 1 Job Portal.</h2>
                         </p>
                         <p class="mb-4 d-none d-md-block">
-                        {/* <strong>The most comprehensive tool for managing your Images, simplifying the task to sort through your Image Data.</strong> */}
                         </p>
                     </div>
                     <div
@@ -55,14 +62,12 @@ class LandingPage extends React.Component{
                         <div>
                             <button  class="btn blue-gradient" 
                             style={{
-                                // "margin-left": "500px",
                             }}
                             onClick={() => this.handleClickRecruiter()}>Recruiter</button>
                         </div>
                         <div>
                             <button  class="btn blue-gradient" 
                             style={{
-                                // "margin-left": "500px",
                             }}
                             onClick={this.handleClickCandidate}>Candidate</button>
                         </div>
@@ -72,8 +77,6 @@ class LandingPage extends React.Component{
                     </div>
                 </div>
                 </div>
-               
-            
             </div>
         );
     }

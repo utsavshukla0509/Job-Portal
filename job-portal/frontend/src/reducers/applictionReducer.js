@@ -17,7 +17,7 @@ import {
         case GET_ALL_CANDIDATE_SUCCESS:
         return {
           ...state,
-          candidateData: action.payload.candidateData,
+          candidateData: action.payload.userData,
         };
       case GET_ALL_CANDIDATE_ERROR:
         return {
