@@ -1,0 +1,22 @@
+//Authentication
+// export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+// export const LOGIN_ERROR = "LOGIN_ERROR";
+export const SIGNUP_ERROR = "SIGNUP_ERROR";
+export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+// export const SIGNOUT = "SIGNOUT";
+export const GET_OTP_SUCCESS = "GET_OTP_SUCCESS";
+export const GET_OTP_ERROR = "GET_OTP_ERROR";
+
+
+
+
+//Job
+export const POST_JOB_SUCCESS = "POST_JOB_SUCCESS";
+export const POST_JOB_ERROR = "POST_JOB_ERROR";
+export const GET_ALL_POST_JOB_SUCCESS = "GET_ALL_POST_JOB_SUCCESS";
+export const GET_ALL_POST_JOB_ERROR = "GET_ALL_POST_JOB_ERROR";
+
+
+//Application
+export const GET_ALL_CANDIDATE_SUCCESS = "GET_ALL_CANDIDATE_SUCCESS";
+export const GET_ALL_CANDIDATE_ERROR = "GET_ALL_CANDIDATE_ERROR";
