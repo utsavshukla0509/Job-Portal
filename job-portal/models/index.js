@@ -37,7 +37,7 @@ async function initialiseTables(){
                         console.log(err);
                         return;
                     }
-                    console.log("Database created...");
+                    console.log("Table/s created...");
                 })
             );
         }

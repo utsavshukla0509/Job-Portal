@@ -6,6 +6,9 @@ router.post("/apply/:jobId",checkAuth,(req,res,next) => {
     req.container.resolve('addApplicationApi').handleRequest(req,res).catch(next);
 });
 
+router.get("/detail/:jobId",(req,res,next) => {
+    req.container.resolve('getAllCandidateApi').handleRequest(req,res).catch(next);
+});
 
 
 module.exports = router;

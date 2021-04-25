@@ -10,7 +10,7 @@ router.post("/signin/:role",(req,res,next) => {
     req.container.resolve('signInApi').handleRequest(req,res).catch(next);
 });
 
-router.post("/generateotp/:type",(req,res,next) => {
+router.post("/generateotp/:type/:role",(req,res,next) => {
     req.container.resolve('generateOTPApi').handleRequest(req,res).catch(next);
 });
 
