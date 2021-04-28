@@ -17,7 +17,7 @@ import {
             'Authorization': `Beaver ${localStorage.getItem('token')}` 
           }
         });
-        
+        console.log(result);
         dispatch({ type: POST_JOB_SUCCESS, payload: result.data});
       } catch (error) {
         // console.log(error.response);

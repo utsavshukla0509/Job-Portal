@@ -42,7 +42,7 @@ import {
         }
       }
     );
-    
+    console.log("candidate",result.data);
       dispatch({ type: GET_ALL_CANDIDATE_SUCCESS, payload: result.data });
     }
     catch(error){

@@ -4,7 +4,7 @@ import Joi from "@hapi/joi";
 import {
   postJob
 } from "../../actions/jobAction";
-
+import "./addJob.css";
 class AddJob extends React.Component{
   constructor(props){
     super(props);
@@ -12,7 +12,6 @@ class AddJob extends React.Component{
         jobDetail : {
             description : "",
             skill : "",
-            companyname : ""
         },
         errors : {},
         openAddFrom : false,
@@ -29,21 +28,18 @@ class AddJob extends React.Component{
   schema = {
     description : Joi.string().alphanum().max(250).required(),
     skill : Joi.string().max(20).required(),
-    companyname : Joi.string().max(20).required(),
   };
 
   handleSubmit = (e) => {
     // e.preventDefault();
+    this.props.postJob(this.state.jobDetail);
 
     const jobDetail = {
       description : "",
             skill : "",
-            companyname : ""
     }
 
-    this.setState({jobDetail : jobDetail,openAddFrom : false});
-
-    this.props.postJob(this.state.jobDetail);
+    this.setState({jobDetail : jobDetail});
   };
 
   validateProperty = (input) => {
@@ -55,11 +51,12 @@ class AddJob extends React.Component{
   };
 
   handleChange = ({ currentTarget: input }) => {
-    const errors = { ...this.state.errors };
-    const errorMessage = this.validateProperty(input);
 
-    if (errorMessage) errors[input.name] = errorMessage;
-    else delete errors[input.name];
+    const errors = { ...this.state.errors };
+    // const errorMessage = this.validateProperty(input);
+
+    // if (errorMessage) errors[input.name] = errorMessage;
+    // else delete errors[input.name];
 
     const jobDetail = { ...this.state.jobDetail };
     jobDetail[input.name] = input.value;
@@ -75,7 +72,7 @@ class AddJob extends React.Component{
   render() {
     const {authMessage} = this.props;
     const {errors} = this.state;
-    const {description,skill,companyname} = this.state.jobDetail;
+    const {description,skill} = this.state.jobDetail;
     console.log(authMessage);
 
     return (
@@ -98,13 +95,7 @@ class AddJob extends React.Component{
                     Add Job</button>
                 </div>
             </div>
-                
-          {authMessage ? (
-            <p className="" style = {{color: "blue"}}> {authMessage}</p>
-          ) : (
-            <> </>
-          )}
-
+              
               {
                   this.state.openAddFrom ? 
                   <div style = {{
@@ -114,88 +105,55 @@ class AddJob extends React.Component{
                       position : 'absolute',
 
                     }}>
-                  
-                  <div className="row pt-5">
-              <div className="col-md-12">
-                <div className="card">
-                  <div className="card-body">
 
-                      <div >
-                        <form onSubmit={this.handleSubmit}>
-                          <div className="md-form">
-                          <p>Description</p>
-                            <input
-                              type="text"
-                              name="description"
-                              id="orangeForm-description"
-                              className="form-control"
-                              error={errors["description"]}
-                              onChange={this.handleChange}
-                              value={description}
-                            />
-                            
-                            {errors["description"] && (
-                              <div className="alert alert-danger">
-                                {" "}
-                                {errors["description"]}{" "}
-                              </div>
-                            )}
-                          </div>
-
-                          
-                          <div className="md-form">
-                          <p>Skill</p>                      
-                            <input
-                              name="skill"
-                              id="orangeForm-skill"
-                              className="form-control"
-                              type="text"
-                              error={errors["skill"]}
-                              onChange={this.handleChange}
-                              value = {skill}
-                            />
-                            {errors["skill"] && (
-                              <div className="alert alert-danger">
-                                {" "}
-                                {errors["skill"]}{" "}
-                              </div>
-                            )}
-                          </div>
-                          <div className="md-form">
-                          <p>Company Name</p>                      
-                            <input
-                              name="companyname"
-                              id="orangeForm-companyname"
-                              className="form-control"
-                              type="text"
-                              error={errors["companyname"]}
-                              onChange={this.handleChange}
-                              value = {companyname}
-                            />
-                            {errors["companyname"] && (
-                              <div className="alert alert-danger">
-                                {" "}
-                                {errors["companyname"]}{" "}
-                              </div>
-                            )}
-                          </div>
-
-                          <div className="text-center">
+                  <div class="contact-form-card">
+                    <div class="w-form">
+                      <form id="email-form"  name="email-form" data-name="Email Form" method="get" 
+                        class="contact-form"
+                        onSubmit={this.handleSubmit}>
+                      <div id="w-node-_33f6c3e2-b2d9-83b1-c376-83268f84cde6-d0212c0e">
+                          <label >Job Description</label>
+                          <textarea
+                            id = "1"
+                            name="description" 
+                            maxlength="5000" 
+                            className="input text-area w-input"  
+                            onChange={this.handleChange}
+                            value={description} 
+                            >
+      
+                          </textarea>
+                        </div>
+                        <div id="w-node-e3b528c9-c5bb-34d6-a3e1-1b661267df27-d0212c0e">
+                          <label for="skill">Skill</label>
+                          <input 
+                            id="2"
+                            name = "skill"
+                            type="text" 
+                            className="input w-input" 
+                            maxlength="256"  
+                            value={skill} 
+                            onChange={this.handleChange}/>
+                        </div>
+                        {authMessage ? (
+                        <p className="" style = {{color : "blue"}}> {authMessage}</p>
+                      ) : (
+                        <> </>
+                      )}
+                        <div className="text-center">
                               <button
                                 className="btn blue-gradient mt-3 btn-lg"
                                 type="button"
+                                style = {{width:'200px'}}
                                 // disabled={this.validate()}
                                 onClick={this.handleSubmit}
                               >
                                 Add
                               </button>
                             </div>
-                        </form>
-                        </div>
-                        </div>
+                      </form>
                     </div>
                     </div>
-                </div>
                 </div>
                 :
                 <></>
@@ -217,7 +175,7 @@ const mapDispatchToProps = (dispatch) => {
   
   const mapStateToProps = (state) => {
     return {
-        authMessage: state.auth.authMessage,
+        authMessage: state.job.authMessage,
     };
   };
   

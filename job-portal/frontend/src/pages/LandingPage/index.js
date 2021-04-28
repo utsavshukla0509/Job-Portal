@@ -1,5 +1,4 @@
 import React from "react";
-import Register from "../Register";
 
 class LandingPage extends React.Component{
     constructor(props){
@@ -13,21 +12,23 @@ class LandingPage extends React.Component{
     }
     
     handleClickRecruiter = () =>{
-        
+        localStorage.setItem("userRole","recruiter");
         this.setState({recruiterClicked : true});
+        
     }
 
     handleClickCandidate = () =>{
-        
+        localStorage.setItem("userRole","candidate");
         this.setState({candidateClicked : true});
+        
     }
 
     render(){
         if(this.state.recruiterClicked){
-            this.props.history.push("/register","recruiter");
+            this.props.history.push("/register");
         }
         if(this.state.candidateClicked){
-            this.props.history.push("/register","candidate");
+            this.props.history.push("/register");
         }
         return(
            
@@ -37,7 +38,7 @@ class LandingPage extends React.Component{
                     "url('https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-g20-summit-simple-business-background-image_232743.jpg')",
                     "background-repeat": "no-repeat",
                     "backgroundSize" : "cover"
-                    ,"height":"17.7cm"
+                    ,"height":"16.85cm"
                 }}
                 >
                 <div class="mask rgba-black-light d-flex justify-content-center align-items-center">

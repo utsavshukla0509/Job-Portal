@@ -13,6 +13,7 @@ class RecruiterDashboard extends React.Component {
     super(props);
     this.state = {
         currentOption : "addjob",
+        userRole : localStorage.getItem("userRole")
     };
 
     this.handleOption = this.handleOption.bind(this);
@@ -27,6 +28,15 @@ class RecruiterDashboard extends React.Component {
   }
 
   render() {
+
+    const userRole = localStorage.getItem("userRole");
+    if(userRole == "candidate" || userRole == "recruiter"){
+      
+    }
+    else{
+      this.props.history.push("/");
+    }
+
     // console.log(localStorage.getItem('name'));
     if (localStorage.getItem('loggedIn') === "false" || 
       localStorage.getItem('token') === "" || 
