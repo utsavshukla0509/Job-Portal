@@ -21,6 +21,8 @@ class Header extends React.Component {
     e.preventDefault();
     this.setState({ logout_status: false });
     localStorage.setItem("loggedIn", false);
+    localStorage.setItem("userRole", "");
+    localStorage.setItem("token", "");
     this.props.signOut();
   };
 

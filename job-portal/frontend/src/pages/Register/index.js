@@ -15,7 +15,7 @@ class RegisterForm extends React.Component {
         otp: "",
 
       },
-      userRole : this.props.location.state,
+      userRole : localStorage.getItem("userRole"),
       errors: {},
       authError: "",
     };
@@ -23,6 +23,10 @@ class RegisterForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleVerify = this.handleVerify.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount(){
+    // this.setState({userRole : localStorage.getItem("userRole")});
   }
 
   validateProperty = (input) => {
@@ -96,16 +100,25 @@ class RegisterForm extends React.Component {
   };
 
   render() {
+    const userRole = this.state.userRole;
+    console.log(typeof userRole);
+    if(userRole == "candidate" || userRole == "recruiter"){
+      
+    }
+    else{
+      this.props.history.push("/");
+    }
+
     const { authMessage, status, userData, loggedIn ,isVerify} = this.props;
     if(loggedIn === true){this.props.history.push("/dashboard");}
     const { errors, authError } = this.state;
     const { username, email, companyname, otp,resume} = this.state.data;
-    console.log("helllllll",this.state.userRole);
+    // console.log("helllllll",this.state.userRole);
     
     if (status) {
         localStorage.setItem("token",userData.token);
         localStorage.setItem("loggedIn", true);
-        this.props.history.push("/dashboard")
+        this.props.history.push("/dashboard",this.state.userRole)
     };
 
     return (
@@ -116,7 +129,7 @@ class RegisterForm extends React.Component {
               <div className="col-md-12">
                 <div className="card">
                   <div className="card-body">
-                    <div className="form-header purple-gradient">
+                    <div className="form-header blue-gradient">
                       <h3 className="font-weight-500 my-2 py-1">
                         <i className="fas fa-user"></i> Register
                       </h3>
@@ -254,7 +267,7 @@ class RegisterForm extends React.Component {
                             <div className="row" style={{ display: "flex" }}>
                               <div className="text-center col-6">
                                 <button
-                                  className="btn  purple-gradient btn-rounded mt-3 btn-lg"
+                                  className="btn  blue-gradient btn-rounded mt-3 btn-lg"
                                   type="button"
                                   onClick={this.handleVerify}
                                 >
@@ -264,7 +277,7 @@ class RegisterForm extends React.Component {
 
                               <div className="text-center col-6">
                                 <button
-                                  className="btn  purple-gradient btn-rounded mt-3 btn-lg"
+                                  className="btn  blue-gradient btn-rounded mt-3 btn-lg"
                                   type="button"
                                   onClick={this.handleResend}
                                 >
@@ -275,7 +288,7 @@ class RegisterForm extends React.Component {
                           ) : (
                             <div className="text-center">
                               <button
-                                className="btn purple-gradient mt-3 btn-lg"
+                                className="btn blue-gradient mt-3 btn-lg"
                                 type="button"
                                 // disabled={this.validate()}
                                 onClick={this.handleSubmit}

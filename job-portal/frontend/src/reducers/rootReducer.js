@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import authReducer from "./authReducer";
 import jobReducer from "./jobReducer";
-import applicationReducer from "./applictionReducer"
+import applicationReducer from "./applicationReducer";
 
 export default combineReducers({
   auth : authReducer,

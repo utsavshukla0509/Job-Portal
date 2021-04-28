@@ -114,16 +114,16 @@ handleCloseCandidateBox = () => {
             <div className="card mb-4 wow fadeIn" style = {{display:'flex',flexDirection:'row'}}>
             <div className="card-body d-sm-flex justify-content-between">
             <p className="mb-2 mb-sm-0 pt-1">
-              <p>
+              <p style = {{margin:'auto'}}>
                   Job Id: {job.id}
               </p>
-              <p>
+              <p style = {{margin:'auto'}}>
                   Job Description: {job.description}
               </p>
-              <p>
+              <p style = {{margin:'auto'}}>
                   Skill: {job.skill}
               </p>
-              <p>
+              <p style = {{margin:'auto'}}>
                   PostedOn: {job.createdon.substr(0,10)}
               </p>
               </p>
@@ -145,7 +145,7 @@ handleCloseCandidateBox = () => {
     const {authMessage,jobData,candidateData} = this.props;
     const {showCandidateList} = this.state;
     console.log(jobData);
-    console.log(candidateData);
+    console.log("sdfsdfsf",candidateData);
     return (
       <div>
           <main className="pt-5 mx-lg-5">

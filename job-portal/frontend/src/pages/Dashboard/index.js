@@ -7,7 +7,7 @@ class Dashboard extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        userRole : this.props.location.state,
+        userRole : localStorage.getItem("userRole"),
     };
   }
 
@@ -16,14 +16,20 @@ class Dashboard extends React.Component {
 
 
   render() {
+    const userRole = localStorage.getItem("userRole");
+    if(userRole == "candidate" || userRole == "recruiter"){
+      
+    }
+    else{
+      this.props.history.push("/");
+    }
+    
     if (localStorage.getItem('loggedIn') === "false" || 
       localStorage.getItem('token') === "" || 
     localStorage.getItem('token') === null || 
     localStorage.getItem('token') === undefined) 
     this.props.history.push("/register");
     
-    const {userRole} = this.state;
-    console.log(userRole);
     
     return (
       <div>

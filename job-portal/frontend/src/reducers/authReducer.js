@@ -6,8 +6,6 @@ import {
     SIGNUP_SUCCESS,
     GET_OTP_SUCCESS,
     GET_OTP_ERROR,
-    // GET_USER_DETAIL_SUCCESS,
-    // GET_USER_DETAIL_ERROR,
   } from "../actions/actionTypes";
   
   const initState = {
@@ -31,7 +29,7 @@ import {
       case LOGIN_ERROR:
         return {
           ...state,
-          // authMessage: action.error.response.data.msg,
+          authMessage: action.error.response.data.msg,
         };
 
       case SIGNUP_SUCCESS:
@@ -45,7 +43,7 @@ import {
       case SIGNUP_ERROR:
         return {
           ...state,
-          // authMessage: action.error.response.data.msg,
+          authMessage: action.error.response.data.msg,
         };
   
       case SIGNOUT:
@@ -66,17 +64,6 @@ import {
         return {
           authMessage: action.error.response.data.msg,
         };
-  
-    //     case GET_USER_DETAIL_SUCCESS:
-    //     return {
-    //       ...state,
-    //       userData: action.payload.data,
-    //     };
-    //   case GET_USER_DETAIL_ERROR:
-    //     return {
-    //       ...state,
-    //       authMessage: action.error.response.data.msg,
-    //     };
   
       default:
         return state;

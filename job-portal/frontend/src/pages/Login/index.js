@@ -1,6 +1,5 @@
 import React from "react";
 import Joi from "@hapi/joi";
-
 import _ from "lodash";
 import { connect } from "react-redux";
 import { signIn,getOTP } from "../../actions/authAction";
@@ -11,11 +10,10 @@ class Login extends React.Component {
     this.state = {
       data: {
         email : "",
-        otp : "",
-        companyname: ""
+        otp : ""
       },
       errors: {},
-      userRole : this.props.location.state,
+      userRole : localStorage.getItem("userRole"),
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -68,7 +66,6 @@ class Login extends React.Component {
     if (
       
       this.state.data.email !== "" &&
-      this.state.data.companyname !== "" &&
       this.state.data.otp !== ""
     ) 
     {
@@ -86,8 +83,16 @@ class Login extends React.Component {
   };
 
   render() {
+    const userRole = localStorage.getItem("userRole");
+    console.log(typeof userRole);
+    if(userRole == "candidate" || userRole == "recruiter"){
+      
+    }
+    else{
+     hashHistory.push("/");
+    }
     const { data, errors } = this.state;
-    const { email,otp ,companyname} = data;
+    const { email,otp} = data;
     const { authMessage, loggedIn, userData,isVerify,status } = this.props;
     if (loggedIn === true) this.props.history.push("/dashboard");
     if (status) {
@@ -105,7 +110,7 @@ class Login extends React.Component {
               <div className="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
                 <div className="card wow fadeIn" data-wow-delay="0.3s">
                   <div className="card-body">
-                    <div className="form-header purple-gradient">
+                    <div className="form-header blue-gradient">
                       <h3 className="font-weight-500 my-2 py-1">
                         <i className="fas fa-user"></i> Log in
                       </h3>
@@ -134,25 +139,7 @@ class Login extends React.Component {
                         )}
                       </div>
 
-                      <div className="md-form">
-                        <i className="fas fa-building prefix "></i>
-                        <input
-                          type="text"
-                          name="companyname"
-                          id="orangeForm-company"
-                          className="form-control"
-                          onChange={this.handleChange}
-                          value={companyname}
-                          autoFocus
-                        />
-                        <label htmlFor="orangeForm-email">Your Company Name</label>
-                        {errors["companyname"] && (
-                          <div className="alert alert-danger">
-                            {" "}
-                            {errors["companyname"]}{" "}
-                          </div>
-                        )}
-                      </div>
+                      
 
                       {isVerify ? (
                             <div className="md-form">
@@ -182,7 +169,7 @@ class Login extends React.Component {
                             <div className="row" style={{ display: "flex" }}>
                               <div className="text-center col-6">
                                 <button
-                                  className="btn  purple-gradient btn-rounded mt-3 btn-lg"
+                                  className="btn  blue-gradient btn-rounded mt-3 btn-lg"
                                   type="button"
                                   onClick={this.handleVerify}
                                 >
@@ -192,7 +179,7 @@ class Login extends React.Component {
 
                               <div className="text-center col-6">
                                 <button
-                                  className="btn  purple-gradient btn-rounded mt-3 btn-lg"
+                                  className="btn  blue-gradient btn-rounded mt-3 btn-lg"
                                   type="button"
                                   onClick={this.handleResend}
                                 >
@@ -203,7 +190,7 @@ class Login extends React.Component {
                           ) : (
                             <div className="text-center">
                               <button
-                                className="btn purple-gradient mt-3 btn-lg"
+                                className="btn blue-gradient mt-3 btn-lg"
                                 type="button"
                                 // disabled={this.validate()}
                                 onClick={this.handleSubmit}
